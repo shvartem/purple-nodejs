@@ -1,24 +1,12 @@
-const {getMilliseconds} = require('./time');
-const {getHoursMinutesSeconds} = require('./transform');
+const {timer} = require('./timer');
 
-function timer({first, second, third}) {
-    if (!first) {
-        console.error('Не переданы параметры для таймера');
-
-        return;
-    }
-
-    const {hours, minutes, seconds} = getHoursMinutesSeconds({first, second, third});
-
-    const delay = getMilliseconds({hours, minutes, seconds});
-
-    setTimeout(() => {
-        console.log('Таймер сработал');
-    }, delay);
+function main() {
+    timer({
+        first: process.argv[2],
+        second: process.argv[3],
+        third: process.argv[4],
+        fourth: process.argv[5],
+    });
 }
 
-timer({
-    first: process.argv[2],
-    second: process.argv[3],
-    third: process.argv[4],
-});
+main();

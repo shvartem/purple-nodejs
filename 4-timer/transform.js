@@ -1,80 +1,33 @@
-const {getValue} = require('./value');
+const {parseRawValue} = require('./parse');
 
-function getHoursMinutesSeconds({first, second, third}) {
+function useValues() {
     const values = {
         hours: 0,
         minutes: 0,
         seconds: 0,
+        message: '',
     };
-
-    const touched = {
-        hours: false,
-        minutes: false,
-        seconds: false,
-    };
-
-    let argsCountMax = 3;
 
     function updateValuesByKey(key, value) {
-        if (touched[key]) {
-            throw new Error(`Нельзя дважды передать ${key}`);
-        }
-
-        touched[key] = true;
-        values[key] += value;
-    }
-
-    if (first) {
-        const {hours, minutes, seconds} = getValue(first);
-
-        if (hours !== undefined) {
-            updateValuesByKey('hours', hours);
-        }
-
-        if (minutes !== undefined) {
-            argsCountMax = 2;
-
-            updateValuesByKey('minutes', minutes);
-        }
-
-        if (seconds !== undefined) {
-            argsCountMax = 1;
-
-            updateValuesByKey('seconds', seconds);
+        if (value) {
+            values[key] += value;
         }
     }
 
-    if (second) {
-        if (argsCountMax < 2) {
-            throw new Error('Минуты или часы не могут быть после секунд');
-        }
+    return {
+        values,
+        updateValuesByKey,
+    };
+}
 
-        const {hours, minutes, seconds} = getValue(second);
+function getHoursMinutesSeconds(...args) {
+    const {values, updateValuesByKey} = useValues();
 
-        if (hours !== undefined) {
-            throw new Error('Неверный порядок аргументов. Требуемый порядок: часы, минуты, секунды');
-        }
+    args.forEach((arg) => {
+        const {key, value} = parseRawValue(arg);
 
-        if (minutes !== undefined) {
-            updateValuesByKey('minutes', minutes);
-        }
-
-        if (seconds !== undefined) {
-            updateValuesByKey('seconds', seconds);
-        }
-    }
-
-    if (third) {
-        const {hours, minutes, seconds} = getValue(third);
-
-        if (hours !== undefined || minutes !== undefined) {
-            throw new Error('Неверный порядок аргументов. Требуемый порядок: часы, минуты, секунды');
-        }
-
-        if (seconds !== undefined) {
-            updateValuesByKey('seconds', seconds);
-        }
-    }
+        updateValuesByKey(key, value);
+    });
 
     return values;
 }

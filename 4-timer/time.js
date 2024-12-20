@@ -10,10 +10,10 @@ function getMillisecondsFromHours(hours) {
     return getMillisecondsFromMinutes(hours * 60);
 }
 
-function getMilliseconds({hours, minutes, seconds}) {
+function getMillisecondsFromHoursMinutesSeconds({hours, minutes, seconds}) {
     return getMillisecondsFromHours(hours) + getMillisecondsFromMinutes(minutes) + getMillisecondsFromSeconds(seconds);
 }
 
 module.exports = {
-    getMilliseconds,
+    getMillisecondsFromHoursMinutesSeconds,
 };
