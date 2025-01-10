@@ -1,0 +1,19 @@
+{
+    "name": "9-weather-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "start": "node ./app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Artem Shalaginov",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "1.7.9",
+        "body-parser": "1.20.3",
+        "express": "4.21.2"
+    }
+}
