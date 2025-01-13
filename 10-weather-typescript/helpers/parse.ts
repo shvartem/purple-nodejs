@@ -1,5 +1,5 @@
 import {IWeatherData} from '../types';
-import {getIconUrl} from './icon';
+import {getIconUrl} from './icon.js';
 
 export const parseWeather = (initialData: IWeatherData) => {
     return {

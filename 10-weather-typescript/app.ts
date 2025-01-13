@@ -1,9 +1,9 @@
 import bodyParser from 'body-parser';
 import express, {NextFunction, Request, Response} from 'express';
 
-import {tokenRouter} from './routes/token.router';
-import {weatherRouter} from './routes/weather.router';
-import {BadRequestError} from './helpers/error';
+import {tokenRouter} from './routes/token.router.js';
+import {weatherRouter} from './routes/weather.router.js';
+import {BadRequestError} from './helpers/error.js';
 
 const PORT = 8000;
 

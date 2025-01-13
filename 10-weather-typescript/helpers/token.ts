@@ -1,4 +1,4 @@
-import {saveKeyValue, TOKEN_DICTIONARY} from '../services/storage.service';
+import {saveKeyValue, TOKEN_DICTIONARY} from '../services/storage.service.js';
 
 async function saveToken(token: string) {
     if (!token.length) {
